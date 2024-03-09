@@ -3,14 +3,16 @@
   instance?
 
 ```
-TODO
+The smallest type would be the t2.nano with 1 vCPU and 0.5 GiB of memory.
+
+Tha largest type would be the u-6tb1.112xlarge with 448 vCPU's and 6144 GiB of memory.
 ```
 
 * How long did it take for the new instance to get into the _running_
   state?
 
 ```
-TODO
+As these questions were provided after the operation was over and done with I can only vaguely estimate. Therefore I would say around 2-3 minutes, so not very long at all.
 ```
 
 * Using the commands to explore the machine listed earlier, respond to
