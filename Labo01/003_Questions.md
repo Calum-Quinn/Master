@@ -18,18 +18,18 @@ After clicking the "launch instance" button, roughly 6 seconds later the instanc
 * Using the commands to explore the machine listed earlier, respond to
   the following questions and explain how you came to the answer:
 
-    * What's the difference between time here in Switzerland and the time set on
+  * What's the difference between time here in Switzerland and the time set on
       the machine?
 ```
 There is a one hour difference.
 ```
 
-    * What's the name of the hypervisor?
+  * What's the name of the hypervisor?
 ```
 HVM is the used hypervisor, this information can be found on the console under the details about the instance.
 ```
 
-    * How much free space does the disk have?
+  * How much free space does the disk have?
 ```
 After running the "df -h" command we got this output:
 
