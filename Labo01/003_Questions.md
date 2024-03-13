@@ -54,7 +54,9 @@ As we can see on the line for /dev/nvme0n1p1 there are 5.8G available.
 There is no response from the ping when pinging the SSH server from our instance.
 There is no response from the ping when pinging the instance from the server either.
 
-After adding an inbound rule to the SSH server security group to allow ICMP traffic from our subnet (10.0.2.10/28), we got the following times when pinging the server from our instance:
+After adding an inbound rule to the SSH server security group to allow ICMP traffic from our subnet (10.0.2.10/28)
+and an inbound rule on our instance to allow ICMP traffic from the SSH server, 
+we got the following times when pinging the server from our instance:
 bitnami@ip-10-0-2-10:~$ ping 10.0.0.5
 PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
 64 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=0.306 ms
@@ -73,8 +75,10 @@ PING 10.0.0.5 (10.0.0.5) 56(84) bytes of data.
 ```
 
 
-The "ifconfig" command does not seem to exist. When using the "ip addr show" command we get the server's private address 10.0.0.5.
-We can communicate with the machine because we made sure the SSH server could accept ICMP traffic from our specific subnet and that the server can transmit ICMP messages into our subnet.
+The "ifconfig" command does not seem to exist. When using the "ip addr show" command we get the server's 
+private address 10.0.0.5.
+We can communicate with the machine because we made sure the SSH server could accept ICMP traffic from 
+our specific subnet and that the server can transmit ICMP messages into our subnet.
 
 devopsteam02@ip-10-0-0-5:~$ ifconfig
 -bash: ifconfig: command not found
