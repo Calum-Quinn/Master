@@ -19,8 +19,22 @@ instances.
 ```bash
 [INPUT]
 
+aws ec2 create-security-group --group-name SG-DEVOPSTEAM02-LB --description "Security group for team 2 load balancer" --vpc-id vpc-03d46c285a2af77ba
 
 [OUTPUT]
+
+sg-0979882d4e5089f30
+
+Inbound rules
+
+[INPUT]
+
+aws ec2 authorize-security-group-ingress --group-id sg-0979882d4e5089f30 --protocol tcp --port 8080 --cidr 10.0.0.0/28
+
+[OUTPUT]
+
+True
+SECURITYGROUPRULES      10.0.0.0/28     8080    sg-0979882d4e5089f30    709024702237    tcp     False   sgr-08dd0082c202a15bd   8080
 
 ```
 
@@ -46,8 +60,23 @@ instances.
 ```bash
 [INPUT]
 
+// left default value for http code of 200, see doc here: https://docs.aws.amazon.com/cli/latest/reference/elbv2/create-target-group.html
+// left default value for --health-check-path of "/", see doc above.
+
+aws elbv2 create-target-group --target-type instance --name TG-DEVOPSTEAM02 --protocol HTTP --port 8080 --ip-address-type ipv4 --vpc-id vpc-03d46c285a2af77ba --protocol-version HTTP1 --health-check-protocol HTTP --health-check-port traffic-port --healthy-threshold-count 2 --unhealthy-threshold-count 2 --health-check-interval-seconds 10 --health-check-timeout-seconds 5
 
 [OUTPUT]
+
+TARGETGROUPS    True    10      /       traffic-port    HTTP    5       2       ipv4    8080    HTTP    HTTP1   arn:aws:elasticloadbalancing:eu-west-3:709024702237:targetgroup/TG-DEVOPSTEAM02/d6f0f0c87fbf6200    TG-DEVOPSTEAM02 instance        2       vpc-03d46c285a2af77ba
+MATCHER 200
+
+[INPUT]
+
+aws elbv2 register-targets --target-group-arn arn:aws:elasticloadbalancing:eu-west-3:709024702237:targetgroup/TG-DEVOPSTEAM02/d6f0f0c87fbf6200 --targets Id=i-09b1de9e5e3d92e56 Id=i-0a6a5f3b8993a8786
+
+[OUTPUT]
+
+(Must launch command as the instances are running)
 
 ```
 
