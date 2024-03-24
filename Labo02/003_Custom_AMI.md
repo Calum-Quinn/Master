@@ -67,6 +67,8 @@ TAGS    Name    EC2_PRIVATE_DRUPAL_DEVOPSTEAM02_B
 
 ```bash
 //updated string connection
+
+ssh devopsteam02@15.188.43.46 -i CLD_KEY_DMZ_DEVOPSTEAM02.pem -L 2223:10.0.2.10:22 -L 888:10.0.2.10:8080 -L 2224:10.0.2.140:22 -L 889:10.0.2.140:8080
 ```
 
 ## Check SQL Accesses
@@ -75,20 +77,50 @@ TAGS    Name    EC2_PRIVATE_DRUPAL_DEVOPSTEAM02_B
 [INPUT]
 //sql string connection from A
 
+bitnami@ip-10-0-2-10:~$ mariadb -h dbi-devopsteam02.cshki92s4w5p.eu-west-3.rds.amazonaws.com -u bn_drupal -p
+
 [OUTPUT]
+
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 71
+Server version: 10.11.7-MariaDB managed by https://aws.amazon.com/rds/
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
 ```
 
 ```sql
 [INPUT]
 //sql string connection from B
 
+bitnami@ip-10-0-2-140:~$ mariadb -h dbi-devopsteam02.cshki92s4w5p.eu-west-3.rds.amazonaws.com -u bn_drupal -p
+
 [OUTPUT]
+
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 72
+Server version: 10.11.7-MariaDB managed by https://aws.amazon.com/rds/
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]>
 ```
 
 ### Check HTTP Accesses
 
 ```bash
 //connection string updated
+
+curl localhost:888
+
+curl localhost:889
 ```
 
 ### Read and write test through the web app
