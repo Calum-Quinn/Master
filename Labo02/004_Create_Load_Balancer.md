@@ -76,8 +76,7 @@ aws elbv2 register-targets --target-group-arn arn:aws:elasticloadbalancing:eu-we
 
 [OUTPUT]
 
-(Must launch command as the instances are running)
-
+No output, but we have two instances unused targets registered now.
 ```
 
 
@@ -104,8 +103,15 @@ field not mentioned at its default value):
 ```bash
 [INPUT]
 
+aws elbv2 create-load-balancer --name ELB-DEVOPSTEAM02 --scheme internal --ip-address-type ipv4 --subnets 	subnet-0318cbafbe9e9e49a subnet-0de1d6edd623c2dd3 --security-group sg-0979882d4e5089f30
 
 [OUTPUT]
+
+LOADBALANCERS   Z3Q77PNBQS71R4  2024-03-26T08:57:31.180000+00:00        internal-ELB-DEVOPSTEAM02-1681402979.eu-west-3.elb.amazonaws.com        ipv4    arn:aws:elasticloadbalancing:eu-west-3:709024702237:loadbalancer/app/ELB-DEVOPSTEAM02/19b37b562c5e2155      ELB-DEVOPSTEAM02        internal        application     vpc-03d46c285a2af77ba
+AVAILABILITYZONES       subnet-0318cbafbe9e9e49a        eu-west-3a
+AVAILABILITYZONES       subnet-0de1d6edd623c2dd3        eu-west-3b
+SECURITYGROUPS  sg-0979882d4e5089f30
+STATE   provisioning
 
 ```
 
@@ -114,9 +120,14 @@ field not mentioned at its default value):
 ```bash
 [INPUT]
 
+ aws elb describe-load-balancers --load-balancer-names ELB-DEVOPSTEAM02 --region eu-west-3
 
 [OUTPUT]
 
+An error occurred (LoadBalancerNotFound) when calling the DescribeLoadBalancers operation: There is no ACTIVE Load Balancer named 'ELB-DEVOPSTEAM02'
+
+// Strange because it is active, and it exists, and I'm searching in the right region. Might be a question of rights.
+// Right answer: internal-ELB-DEVOPSTEAM02-1681402979.eu-west-3.elb.amazonaws.com
 ```
 
 * Get the ELB deployment status
@@ -131,15 +142,22 @@ Note : In the EC2 console select the Target Group. In the
 
 ```bash
 //connection string updated
+
+ssh devopsteam02@15.188.43.46 -i CLD_KEY_DMZ_DEVOPSTEAM02.pem -L 2223:10.0.2.10:22 -L 888:10.0.2.10:8080 -L 2224:10.0.2.140:22 -L 889:10.0.2.140:8080 -L 1234:internal-ELB-DEVOPSTEAM02-1681402979.eu-west-3.elb.amazonaws.com:8080
 ```
 
 * Test your application through your ssh tunneling
 
 ```bash
 [INPUT]
-curl localhost:[local port forwarded]
+curl localhost:1234
 
 [OUTPUT]
+
+// J'ai des connections refused etc.
+// Il y a des soucis encore.
+
+// J'ai aussi des problèmes avec l'état du target group qui part pas de unused. Je sais pas trop pourquoi.
 
 ```
 
