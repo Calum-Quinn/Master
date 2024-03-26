@@ -133,6 +133,11 @@ curl localhost:889
 
 ```
 //TODO
+
+I only needed to connect on one machine, and it left me connected on the other machine.
+
+Changed the email address on port webapp accessible from port 888 and it changed as well on the webapp accessible from port 889.
+
 ```
 
 ### Change the profil picture
@@ -141,4 +146,6 @@ curl localhost:889
 
 ```
 //TODO
+
+While the email address information was shared, the image wasn't. It's not visible on the second instance. But the information that there is an image is present on the second instance, it's just that the image data isn't accessible.
 ```
