@@ -16,7 +16,7 @@
 htop
 
 [OUTPUT]
-![htop output](img/htop.png)
+![htop output](./img/htop.png)
 ```
 
 ### Stress your instance
@@ -26,7 +26,7 @@ htop
 stress --cpu 2
 
 [OUTPUT]
-![htop output](img/htop2.png)
+![htop output](./img/htop2.png)
 ```
 
 * (Scale-IN) Observe the autoscaling effect on your infa
@@ -34,12 +34,12 @@ stress --cpu 2
 
 ```
 [INPUT]
-![cloud Watch](img/cloudWatch.png)
+![cloud Watch](./img/cloudWatch.png)
 ```
 [Sample](./img/CLD_AWS_CLOUDWATCH_CPU_METRICS.PNG)
 
 ```
-![instance list](img/instanceList.png)
+![instance list](./img/instanceList.png)
 ```
 [Sample](./img/CLD_AWS_EC2_LIST.PNG)
 
@@ -54,13 +54,13 @@ aws ec2 describe-instances
 
 ```
 //TODO screenshot of the activity history
-![activity history](img/activity.png)
+![activity history](./img/activity.png)
 ```
 [Sample](./img/CLD_AWS_ASG_ACTIVITY_HISTORY.PNG)
 
 ```
 //TODO screenshot of the cloud watch alarm target tracking
-![alarms](img/alarms.png)
+![alarms](./img/alarms.png)
 ```
 [Sample](./img/CLD_AWS_CLOUDWATCH_ALARMHIGH_STATS.PNG)
 
@@ -71,17 +71,17 @@ aws ec2 describe-instances
 
 ```
 //TODO screenshot from cloud watch metric
-![cloud watch](img/cloudWatch2.png)
+![cloud watch](./img/cloudWatch2.png)
 ```
 
 ```
 //TODO screenshot of ec2 instances list (terminated state)
-![instance list](img/instanceList2.png)
+![instance list](./img/instanceList2.png)
 ```
 
 ```
 //TODO screenshot of the activity history
-![activity history](img/activity2.png)
+![activity history](./img/activity2.png)
 ```
 
 ## Release Cloud resources
