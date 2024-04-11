@@ -16,18 +16,17 @@
 htop
 
 [OUTPUT]
-//copy the part representing vCPus, RAM and swap usage
+![htop output](img/htop.png)
 ```
 
 ### Stress your instance
 
 ```
 [INPUT]
-//stress command
+stress --cpu 2
 
 [OUTPUT]
-//copy the part representing vCPus, RAM and swap usage
-//tip : use two ssh sessions....
+![htop output](img/htop2.png)
 ```
 
 * (Scale-IN) Observe the autoscaling effect on your infa
@@ -35,30 +34,33 @@ htop
 
 ```
 [INPUT]
-//Screen shot from cloud watch metric
+![cloud Watch](img/cloudWatch.png)
 ```
 [Sample](./img/CLD_AWS_CLOUDWATCH_CPU_METRICS.PNG)
 
 ```
-//TODO screenshot of ec2 instances list (running state)
+![instance list](img/instanceList.png)
 ```
 [Sample](./img/CLD_AWS_EC2_LIST.PNG)
 
 ```
 //TODO Validate that the various instances have been distributed between the two available az.
 [INPUT]
-//aws cli command
+aws ec2 describe-instances
 
 [OUTPUT]
+
 ```
 
 ```
 //TODO screenshot of the activity history
+![activity history](img/activity.png)
 ```
 [Sample](./img/CLD_AWS_ASG_ACTIVITY_HISTORY.PNG)
 
 ```
 //TODO screenshot of the cloud watch alarm target tracking
+![alarms](img/alarms.png)
 ```
 [Sample](./img/CLD_AWS_CLOUDWATCH_ALARMHIGH_STATS.PNG)
 
@@ -69,14 +71,17 @@ htop
 
 ```
 //TODO screenshot from cloud watch metric
+![cloud watch](img/cloudWatch2.png)
 ```
 
 ```
 //TODO screenshot of ec2 instances list (terminated state)
+![instance list](img/instanceList2.png)
 ```
 
 ```
 //TODO screenshot of the activity history
+![activity history](img/activity2.png)
 ```
 
 ## Release Cloud resources
