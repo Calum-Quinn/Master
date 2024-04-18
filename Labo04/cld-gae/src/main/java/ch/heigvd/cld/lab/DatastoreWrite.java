@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.Objects;
+import java.util.Properties;
 
 @WebServlet(name = "DatastoreWrite", value = "/datastorewrite")
 public class DatastoreWrite extends HttpServlet {
@@ -24,9 +27,28 @@ public class DatastoreWrite extends HttpServlet {
         pw.println("Writing entity to datastore.");
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        Entity book = new Entity("book");
-        book.setProperty("title", "The grapes of wrath");
-        book.setProperty("author", "John Steinbeck");
-        datastore.put(book);
+
+        final String kindConst = "_kind";
+        final String keyConst = "_key";
+        String kind = req.getParameter(kindConst);
+        String key = req.getParameter(keyConst);
+
+        Entity element;
+
+        if(key != null) {
+            element = new Entity(kind,key);
+        }
+        else {
+            element = new Entity(kind);
+        }
+
+        for (Enumeration parameterNames = req.getParameterNames(); parameterNames.hasMoreElements();) {
+            String nextElement = parameterNames.nextElement().toString();
+            if (Objects.equals(nextElement, "_kind") || Objects.equals(nextElement, "_key")) {
+                continue;
+            }
+            element.setProperty(nextElement, req.getParameter(nextElement));
+        }
+        datastore.put(element);
     }
 }
