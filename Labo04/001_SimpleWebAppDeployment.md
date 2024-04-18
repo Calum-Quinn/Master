@@ -56,7 +56,11 @@ Create a simple web application as follows.
    `HelloAppEngine` file. What does the code do?
 
    ```
-   //TODO
+   The code implements two functions (doGet() and getInfo()) which are accessed through an HTTP GET request at the URL ending in /hello.
+   
+   doGet() prints some welcome text including thes version of Java and it's specification being used.
+   
+   getInfo() returns a String containing the versions of Java and the OS plus the name of the current user. 
    ```
 
 6. Note the annotation starting with `@WebServlet` in front of the
@@ -66,14 +70,21 @@ Create a simple web application as follows.
    `web.xml`. What information does it contain? And what is its use ?
 
    ```
-   //TODO
+   This is a configuration file for the web app.
+   
+   It configures various settings and versions including a default file to be used as a Welcome File.
+   
+   The elements configured are:
+    - XMS schemas to be used
+	- Namespace for the schema
+	- Java Enterprise Edition specification version to be used
    ```
 
 8. Inspect the Google App Engine configuration file
    `appengine-web.xml` in `webapp/WEB-INF`. What information does it contain?
 
    ```
-   //TODO
+   The file configures the namespace to be used, the version of java runtime, the usage of multiple threads and the location of the logging configuration file.
    ```
 
 9. Edit the Google App Engine configuration file as follows:
@@ -85,7 +96,9 @@ Create a simple web application as follows.
     `index.jsp` spotted in `web.xml`. What is its use ?
 
     ```
-    //TODO
+    This is the Welcome Page previously seen.
+	
+	It displays various hardcoded things but also calls the getInfo() function from earlier to show more precise dynamic system information.
     ```
 
 ---
@@ -155,17 +168,5 @@ Deliverables:
   **appengine-web.xml** and **index.jsp** files in a few sentences.
 
   ```
-  //TODO Java class files
-  ```
-
-  ```
-  //TODO web.xml
-  ```
-
-  ```
-  //TODO appengine-web.xml
-  ```
-
-  ```
-  //TODO index.jsp
+  There were four boxes here to fill in but as they have already been filled in previously in this same document I allowed myself to remove them.
   ```
