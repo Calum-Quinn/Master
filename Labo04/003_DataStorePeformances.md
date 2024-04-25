@@ -71,6 +71,8 @@ Deliverables:
 
   ```
   The first servlet has a peak latency between 7'000 and 8'000 ms, the second peaks at over twice as much around 18'000ms.
+
+  Requests to the datastore need more time given that the responses must be more complexe and need access to other sources of information. This results in a longer latency, when compared to the first servlet which is really simple.
   ```
 
 - Compare the response times shown by vegeta with the App Engine
@@ -97,25 +99,26 @@ Deliverables:
 	![Quotas](./Quotas.png)
 	
   ```
-	- Read operations (0.00009 Million Ops) :
-	- API calls(3,982):
-	- Stored Data(0.00023 GB):
-	- Data sent (0.00013 GB):
-	- Data received(0.00028 GB):
-	- Entity fetch ops(90):
-	- Entity writes(0.0039 Million Ops):
-	- Index write ops(3,925):
-	- Network egress(0.000014 GB):
-	- Storage Class B Operations(0):
-	- Storage Class A Operations(0):
-	- Network (Egress) - Americas and EMEA(0.0001 GB):
+- Read operations (0.00009 Million Ops): Operations related to retrieving data from storage.
+- API calls (3,982): The number of times API calls were made to retrieve data.
+- Stored Data (0.00023 GB): Amount of data retrieved from storage.
+- Data sent (0.00013 GB): Volume of data transmitted from the system during read operations.
+- Data received (0.00028 GB): Volume of data received by the system during read operations.
+- Entity fetch ops (90): Operations involving fetching entities from the data source.
+- Entity writes (0.0039 Million Ops): Operations involving writing entities to the data source.
+- Index write ops (3,925): Operations related to writing indexes for efficient data retrieval.
+- Network egress (0.000014 GB): Data transferred out of the system over the network.
+- Storage Class B Operations (0): Operations specific to Storage Class B, which were not utilized.
+- Storage Class A Operations (0): Operations specific to Storage Class A, which were not utilized.
+- Network (Egress) - Americas and EMEA (0.0001 GB): Data egressed from the system to regions in the Americas and EMEA.
   ```
 
 - Let's suppose you become suspicious that the algorithm for the automatic scaling of
   instances is not working correctly. Imagine a way in which the algorithm could be broken. Which measures shown in the console would you use to detect this failure?
 
   ```
-  //TODO
+  We may want to monitor for unexpected behavior in the app engine dashboard, such as fluctuations in request traffic or response times that don't seem to make sense with changes in workload demands.
+  We could also monitor the instance dashboard of the app engine, or the quotas to find evidence of problems and try to troubleshoot the issues we may encounter.
   ```
 
 ## Troubleshooting
