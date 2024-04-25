@@ -99,18 +99,18 @@ Deliverables:
 	![Quotas](./Quotas.png)
 	
   ```
-- Read operations (0.00009 Million Ops): Operations related to retrieving data from storage.
-- API calls (3,982): The number of times API calls were made to retrieve data.
-- Stored Data (0.00023 GB): Amount of data retrieved from storage.
-- Data sent (0.00013 GB): Volume of data transmitted from the system during read operations.
-- Data received (0.00028 GB): Volume of data received by the system during read operations.
-- Entity fetch ops (90): Operations involving fetching entities from the data source.
-- Entity writes (0.0039 Million Ops): Operations involving writing entities to the data source.
-- Index write ops (3,925): Operations related to writing indexes for efficient data retrieval.
-- Network egress (0.000014 GB): Data transferred out of the system over the network.
-- Storage Class B Operations (0): Operations specific to Storage Class B, which were not utilized.
-- Storage Class A Operations (0): Operations specific to Storage Class A, which were not utilized.
-- Network (Egress) - Americas and EMEA (0.0001 GB): Data egressed from the system to regions in the Americas and EMEA.
+	- Read operations (0.00009 Million Ops): Operations related to retrieving data from storage.
+	- API calls (3,982): The number of times API calls were made to retrieve data.
+	- Stored Data (0.00023 GB): Amount of data retrieved from storage.
+	- Data sent (0.00013 GB): Volume of data transmitted from the system during read operations.
+	- Data received (0.00028 GB): Volume of data received by the system during read operations.
+	- Entity fetch ops (90): Operations involving fetching entities from the data source.
+	- Entity writes (0.0039 Million Ops): Operations involving writing entities to the data source.
+	- Index write ops (3,925): Operations related to writing indexes for efficient data retrieval.
+	- Network egress (0.000014 GB): Data transferred out of the system over the network.
+	- Storage Class B Operations (0): Operations specific to Storage Class B, which were not utilized.
+	- Storage Class A Operations (0): Operations specific to Storage Class A, which were not utilized.
+	- Network (Egress) - Americas and EMEA (0.0001 GB): Data egressed from the system to regions in the Americas and EMEA.
   ```
 
 - Let's suppose you become suspicious that the algorithm for the automatic scaling of
