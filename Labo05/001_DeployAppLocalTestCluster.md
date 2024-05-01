@@ -134,7 +134,7 @@ Using the `redis-svc.yaml` file as example and information from `api-pod.yaml`, 
 
 Be careful with the indentation of the YAML files. If your code editor has a YAML mode, enable it.
 
-  * Deploy and verify the API-Service and Pod (similar to the Redis ones) and verify that they are up and running on the correct ports.
+  * Deploy and verify the API-Service and Pod `kubectl create -f api-svc.yaml` and verify that they are up and running on the correct ports.
 
 ### Deploy the Frontend Pod
 
@@ -151,7 +151,7 @@ It also needs to be initialized with the following environment variables (check 
 
 > Hint: remember that anything you define as a Service will be assigned a DOMAIN that is visible via DNS everywhere in the cluster and a PORT.
 
-  * Deploy the Pod using `kubectl`.
+  * Deploy the Pod using `kubectl create -f frontend-pod.yaml`.
 
 ### Verify the ToDo application
 
@@ -162,7 +162,7 @@ The `kubectl` program is able to establish a secure tunnel between your local ma
 To start port forwarding, run
 
 ```sh
-$ kubectl port-forward pod_name local_port:pod_port
+$ kubectl port-forward frontend 8001:8080
 ```
 
 where `pod_name` is the name of the Frontend Pod, `pod_port` is the port where the Frontend Pod is listening, and `local_port` is a free port on your local machine, say 8001.
@@ -183,10 +183,42 @@ Document any difficulties you faced and how you overcame them. Copy the object d
 
 ```yaml
 # api-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+  labels:
+    component: api
+    app: todo
+spec:
+  ports:
+  - port: 8081
+    targetPort: 8081
+    name: api
+  selector:
+    app: todo
+    component: api
+  type: ClusterIP
 ```
 
 ```yaml
 # frontend-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    component: frontend
+    app: todo
+spec:
+  containers:
+  - name: frontend
+    image: icclabcna/ccp2-k8s-todo-frontend
+    ports:
+    - containerPort: 8080
+    env:
+    - name: API_ENDPOINT_URL
+      value: "http://api:8081"
 ```
 
 > [!TIP]
