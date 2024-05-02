@@ -49,7 +49,7 @@ Unlike the Redis and API Services the Frontend needs to be accessible from outsi
   * We need to change a configuration parameter. Our cluster runs on the GKE cloud and we want to use a GKE load balancer to expose our service.
   * Read the section "Publishing Services - Service types" of the K8s documentation 
     <https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types>
-  * Deploy the Service using `kubectl`.
+  * Deploy the Service using `kubectl create -f frontend-svc.yaml`.
 
 This will trigger the creation of a load balancer on GKE. This might take some minutes. You can monitor the creation of the load balancer using `kubectl describe`.
 
@@ -73,12 +73,28 @@ Document any difficulties you faced and how you overcame them. Copy the object d
 
 ```yaml
 # frontend-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: frontend
+  name: frontend-svc
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    name: http
+  selector:
+    app: todo
+    component: frontend
+  type: LoadBalancer
+
 ```
 
 Take a screenshot of the cluster details from the GKE console. Copy the output of the `kubectl describe` command to describe your load balancer once completely initialized.
 
 > // TODO
 
-```````
-// TODO object descriptions
-```````
+![Cluster details](./img/GKEConsole.png)
+
+![kubectl describe](./img/KubectlDescribePart2.png)
