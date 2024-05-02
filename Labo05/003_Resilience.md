@@ -63,8 +63,11 @@ You may also use `kubectl get all` repeatedly to see a list of all resources.  Y
 	```
     
   * How can you update a component? (see "Updating a Deployment" in the deployment documentation)
-
-    > // TODO
+	```
+	Update the necessary elements (e.g. kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1)
+	
+	Rollout the changes
+	```
 
 ## Subtask 3.3 - Put autoscaling in place and load-test it
 
