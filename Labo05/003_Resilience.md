@@ -244,5 +244,4 @@ spec:
         env:
         - name: API_ENDPOINT_URL
           value: "http://api:8081"
-
 ```
