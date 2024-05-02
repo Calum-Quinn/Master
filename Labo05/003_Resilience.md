@@ -43,19 +43,24 @@ $ kubectl get pods --watch
 You may also use `kubectl get all` repeatedly to see a list of all resources.  You should also verify if the application stays available by continuously reloading your browser window.
 
   * What happens if you delete a Frontend or API Pod? How long does it take for the system to react?
-    > // TODO
+    ```
+	It directly creates a new pod in a matter of seconds and then properly terminates the deleted one.
+	```
     
   * What happens when you delete the Redis Pod?
-
-    > // TODO
+	```
+	It terminates the current pod and then very quickly creates a new one.
+	```
     
   * How can you change the number of instances temporarily to 3? Hint: look for scaling in the deployment documentation
-
-    > // TODO
+	```
+	You can use a command similar to kubectl scale deployment/api-deploy --replicas=10
+	```
     
   * What autoscaling features are available? Which metrics are used?
-
-    > // TODO
+	```
+	Minimum and maximum number of pods desired based on CPU usage of the current pods.
+	```
     
   * How can you update a component? (see "Updating a Deployment" in the deployment documentation)
 
