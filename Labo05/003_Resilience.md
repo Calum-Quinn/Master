@@ -72,8 +72,51 @@ You may also use `kubectl get all` repeatedly to see a list of all resources.  Y
 ## Subtask 3.3 - Put autoscaling in place and load-test it
 
 On the GKE cluster deploy autoscaling on the Frontend with a target CPU utilization of 30% and number of replicas between 1 and 4. 
+`kubectl autoscale deployment/frontend-deploy --min=1 --max=4 --cpu-percent=30`
+
 
 Load-test using Vegeta (500 requests should be enough).
+`echo "GET http://34.65.7.59" | vegeta attack -duration=1m -rate=500 | vegeta report --type=text`
+
+```
+[OUTPUT]
+Requests      [total, rate, throughput]         30000, 500.01, 499.40
+Duration      [total, attack, wait]             1m0s, 59.998s, 73.84ms
+Latencies     [min, mean, 50, 90, 95, 99, max]  16.568ms, 102.037ms, 69.076ms, 144.631ms, 368.123ms, 604.963ms, 1.438s
+Bytes In      [total, mean]                     18930000, 631.00
+Bytes Out     [total, mean]                     0, 0.00
+Success       [ratio]                           100.00%
+Status Codes  [code:count]                      200:30000
+Error Set:
+```
+
+```
+kubectl get deployment --watch
+
+[OUTPUT]
+NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+api-deploy        2/2     2            2           4h55m
+frontend-deploy   2/2     2            2           4h55m
+redis-deploy      1/1     1            1           4h55m
+frontend-deploy   2/2     2            2           5h2m
+frontend-deploy   2/2     2            2           5h2m
+frontend-deploy   2/2     0            2           5h2m
+frontend-deploy   2/2     1            2           5h2m
+frontend-deploy   3/2     1            3           5h2m
+frontend-deploy   2/2     1            2           5h2m
+frontend-deploy   2/2     2            2           5h2m
+frontend-deploy   3/2     2            3           5h2m
+frontend-deploy   2/2     2            2           5h2m
+frontend-deploy   2/4     2            2           5h3m
+frontend-deploy   2/4     2            2           5h3m
+frontend-deploy   2/4     2            2           5h3m
+frontend-deploy   2/4     4            2           5h3m
+frontend-deploy   3/4     4            3           5h3m
+frontend-deploy   4/4     4            4           5h3m
+frontend-deploy   4/1     4            4           5h9m
+frontend-deploy   4/1     4            4           5h9m
+frontend-deploy   1/1     1            1           5h9m
+```
 
 > [!NOTE]
 >
@@ -105,18 +148,101 @@ Document your observations in the lab report. Document any difficulties you face
 
 > // TODO
 
-```````sh
-// TODO object descriptions
-```````
-
 ```yaml
 # redis-deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deploy
+  labels:
+    component: redis
+    app: todo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: redis
+      app: todo
+  template:
+    metadata:
+      labels:
+        component: redis
+        app: todo
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 6379
+        args:
+        - redis-server
+        - --requirepass ccp2
+        - --appendonly yes
+
 ```
 
 ```yaml
 # api-deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deploy
+  labels:
+    component: api
+    app: todo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: api
+      app: todo
+  template:
+    metadata:
+      labels:
+        component: api
+        app: todo
+    spec:
+      containers:
+      - name: api
+        image: icclabcna/ccp2-k8s-todo-api
+        ports:
+        - containerPort: 8081
+        env:
+        - name: REDIS_ENDPOINT
+          value: redis-svc
+        - name: REDIS_PWD
+          value: ccp2
+
 ```
 
 ```yaml
 # frontend-deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deploy
+  labels:
+    component: frontend
+    app: todo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: frontend
+      app: todo
+  template:
+    metadata:
+      labels:
+        component: frontend
+        app: todo
+    spec:
+      containers:
+      - name: frontend
+        image: icclabcna/ccp2-k8s-todo-frontend
+        ports:
+        - containerPort: 8080
+        env:
+        - name: API_ENDPOINT_URL
+          value: "http://api:8081"
+
 ```
