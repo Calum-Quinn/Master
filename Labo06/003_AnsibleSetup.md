@@ -25,6 +25,15 @@ ansible --version
 //TODO
 [OUTPUT]
 ```bash
+ansible [core 2.16.7]
+  config file = None
+  configured module search path = ['/home/calum/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.10/dist-packages/ansible
+  ansible collection location = /home/calum/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible
+  python version = 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] (/usr/bin/python3)
+  jinja version = 3.1.4
+  libyaml = True
 ```
 
 You should see output similar to the following:
