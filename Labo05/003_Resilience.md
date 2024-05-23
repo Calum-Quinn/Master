@@ -148,6 +148,8 @@ Document your observations in the lab report. Document any difficulties you face
 
 > // TODO
 
+```````sh
+// TODO autoscaling description
 ```yaml
 # redis-deploy.yaml
 apiVersion: apps/v1
