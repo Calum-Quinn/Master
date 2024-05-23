@@ -179,6 +179,9 @@ Document any difficulties you faced and how you overcame them. Copy the object d
 
 ```````
 // TODO object descriptions
+
+We didn't really encounter any difficulty while doing this part. It went smoothly.
+
 ```````
 
 ```yaml

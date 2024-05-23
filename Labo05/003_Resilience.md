@@ -18,7 +18,7 @@ Converting a Pod to be managed by a Deployment is quite simple.
 
   * Use only 1 instance for the Redis-Server. Why?
 
-    > // TODO
+    > We want to keep it at only one instance so that there can't be any data hazards, given that we will only have one state for our data.
 
   * Delete all application Pods (using `kubectl delete pod ...`) and replace them with deployment versions.
 
@@ -148,8 +148,17 @@ Document your observations in the lab report. Document any difficulties you face
 
 > // TODO
 
+<<<<<<< HEAD
 ```````sh
 // TODO autoscaling description
+=======
+```txt
+Again, we didn't really encounter difficulties. Things went well.
+
+We did observe that the autoscaling was working as expected via the vegeta tests. Things were kept stable.
+```
+
+>>>>>>> 64734668e6368991f75feccc9c2a407bb5a1d231
 ```yaml
 # redis-deploy.yaml
 apiVersion: apps/v1
