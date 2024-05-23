@@ -29,6 +29,13 @@ ansible webservers -m ping
 //TODO
 [OUTPUT]
 ```json
+gce_instance | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
 ```
 
 The output should be the same as before.
@@ -109,11 +116,27 @@ address of the managed server. You should see the homepage showing
 //TODO
 [INPUT]
 ```bash
-curl <yourIP>
+curl 34.65.252.194
 ```
 
 [OUTPUT]
 ```html
+<html>
+    <head>
+    <title>Welcome to ansible</title> </head>
+    <body>
+    <h1>nginx, configured by Ansible</h1>
+    <p>If you can see this, Ansible successfully installed nginx.</p>
+    <p>Ansible managed</p>
+    <p>Some facts Ansible gathered about this machine:
+    <table>
+        <tr><td>OS family:</td><td>Debian</td></tr>
+        <tr><td>Distribution:</td><td>Ubuntu</td></tr>
+        <tr><td>Distribution version:</td><td>20.04</td></tr>
+    </table>
+    </p>
+    </body>
+</html>
 ```
 
 Deliverables:
@@ -123,7 +146,9 @@ Deliverables:
 //TODO
 |FileName|Explanation|
 |:--|:--|
-||||
+|hosts|Lists the instances for ansible to organise|
+|ansible.cfg|Lists the properties to be used for the various managed instances|
+|playbooks|Contains the basics for the nginx server like the template and files|
 
 
 * Deliver a folder "ansible" with your configuration.
