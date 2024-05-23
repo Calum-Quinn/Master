@@ -85,15 +85,18 @@ Deliverables:
 //TODO
 [INPUT]
 ```
-//terraform destroy command
+terraform destroy
 ```
 
 [OUTPUT]
 ```
+google_compute_instance.default: Destruction complete after 1m1s
+
+Destroy complete! Resources: 3 destroyed.
 ```
 
 Recreate the infra (no input/output needed)
 
 ```
-//TODO
+terraform apply -input=false
 ```
