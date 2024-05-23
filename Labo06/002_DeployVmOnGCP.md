@@ -5,7 +5,7 @@ managed by Terraform.
 
 This task is highly inspired from the following guide: [Get started with Terraform](https://cloud.google.com/docs/terraform/get-started-with-terraform).
 
-Create a new Google Cloud project. Save the project ID, it will be used later.
+Create a new Google Cloud project. Save the project ID (`aerobic-copilot-424214-k9`), it will be used later.
 
 * Name: __labgce__
 
